@@ -6,11 +6,11 @@ This contains all the official [Flutter codelabs](https://flutter.dev/docs/codel
 
 # Good for beginners
 
-## First Flutter App
+## [First Flutter App](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1)
 
 **Folder Name : firts-flutter-app**
 
-Create a simple mobile app that generates proposed names for a startup company. [Part 1](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1) & [Part 2](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2)
+Create a simple mobile app that generates proposed names for a startup company. [Part 2](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2)
 
 ## [First Flutter Web App](https://flutter.dev/docs/get-started/codelab-web)
 
