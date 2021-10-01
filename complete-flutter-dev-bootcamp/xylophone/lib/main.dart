@@ -4,65 +4,40 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-
   void playsound(int soundNumber) {
     final player = AudioCache();
     player.play('note$soundNumber.wav');
+  }
+
+  Expanded buildKey({Color color, int soundNumber}) {
+    return Expanded(
+      child: MaterialButton(
+        color: color,
+        onPressed: () => playsound(soundNumber),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-              children: [
-                MaterialButton(
-                  color: Colors.red,
-                  onPressed: (){
-                    playsound(1);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.orange,
-                  onPressed: (){
-                    playsound(2);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.yellow,
-                  onPressed: (){
-                    playsound(3);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.green,
-                  onPressed: (){
-                    playsound(4);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.teal,
-                  onPressed: (){
-                    playsound(5);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  onPressed: (){
-                    playsound(6);
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.deepPurple,
-                  onPressed: (){
-                    playsound(7);
-                  },
-                ),
-              ],
-            ),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              buildKey(color: Colors.red, soundNumber: 1),
+              buildKey(color: Colors.orange, soundNumber: 2),
+              buildKey(color: Colors.yellow, soundNumber: 3),
+              buildKey(color: Colors.green, soundNumber: 4),
+              buildKey(color: Colors.teal, soundNumber: 5),
+              buildKey(color: Colors.blue, soundNumber: 6),
+              buildKey(color: Colors.deepPurple, soundNumber: 7),
+            ],
           ),
         ),
+      ),
     );
   }
 }
