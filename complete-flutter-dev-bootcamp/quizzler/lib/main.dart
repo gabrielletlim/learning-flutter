@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -32,12 +35,35 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNumber = 0;
-  List<Question> questions = [
-    new Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    new Question(q: 'Approximately one quarter of human bones are in the feet.', a: true),
-    new Question(q: 'A slug\'s blood is green.', a: true)
-  ];
+  void checkAnswer(bool userAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+
+    setState(() {
+      if (quizBrain.isFinished()) {
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+
+        quizBrain.reset();
+        scoreKeeper = [];
+      } else {
+        if (userAnswer == correctAnswer) {
+          scoreKeeper.add(Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scoreKeeper.add(Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+        quizBrain.nextQuestion();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +77,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionNumber < questions.length ? questions[questionNumber].questionText : "Game finished",
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -77,15 +103,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions[questionNumber].answer;
-
-                setState(() {
-                  questionNumber++;
-                  scoreKeeper.add(Icon(
-                    correctAnswer == true ? Icons.check : Icons.close,
-                    color: correctAnswer == true ? Colors.green : Colors.red,
-                  ));
-                });
+                checkAnswer(true);
               },
             ),
           ),
@@ -103,15 +121,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions[questionNumber].answer;
-
-                setState(() {
-                  questionNumber++;
-                  scoreKeeper.add(Icon(
-                    correctAnswer == false ? Icons.check : Icons.close,
-                    color: correctAnswer == false ? Colors.green : Colors.red,
-                  ));
-                });
+                checkAnswer(false);
               },
             ),
           ),
