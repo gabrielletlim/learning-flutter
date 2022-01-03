@@ -8,10 +8,7 @@ const activeCardColor = Color(0xFF1D1E33);
 const inactiveCardColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
 
-enum Gender {
-  male,
-  female
-}
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -33,35 +30,31 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: [
                 Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedGender = Gender.male;
-                        });
-                      },
-                  child: ReusableCard(
-                    colour: selectedGender == Gender.male
-                        ? activeCardColor
-                        : inactiveCardColor,
-                    cardChild:
-                        IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
-                  ),
+                    child: ReusableCard(
+                      onPress: () {
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
+                  },
+                  colour: selectedGender == Gender.male
+                      ? activeCardColor
+                      : inactiveCardColor,
+                  cardChild:
+                      IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
                 )),
                 Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedGender = Gender.female;
-                        });
-                      },
-                      child: ReusableCard(
+                    child: ReusableCard(
+                      onPress: () {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  },
                   colour: selectedGender == Gender.female
                       ? activeCardColor
                       : inactiveCardColor,
                   cardChild: IconContent(
-                        icon: FontAwesomeIcons.venus, label: "FEMALE"),
-                ),
-                    ))
+                      icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                ))
               ],
             )),
             Expanded(child: ReusableCard(colour: activeCardColor)),
